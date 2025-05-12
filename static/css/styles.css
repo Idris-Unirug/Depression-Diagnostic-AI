@@ -1,15 +1,23 @@
-/* General Reset */
+/* ========== General Reset ========== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.container h3{
-    color: #2196F3;
+/* ========== Global Styles ========== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('/static/img/mental1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    line-height: 1.6;
 }
 
-/* Navbar Styles */
+/* ========== Navbar ========== */
 .navbar {
     background-color: #4CAF50;
     padding: 10px 20px;
@@ -39,10 +47,6 @@
     gap: 20px;
 }
 
-.nav-menu li {
-    display: inline;
-}
-
 .nav-menu a {
     color: white;
     text-decoration: none;
@@ -53,47 +57,51 @@
     text-decoration: underline;
 }
 
-/* Body and Font Settings */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
-
-.button {
+/* ========== Button Styles ========== */
+.button,
+button,
+.auth-btn {
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
+    cursor: pointer;
 }
 
 .button.secondary {
     background-color: #2196F3;
 }
 
-.button:hover {
+.button:hover,
+.auth-btn:hover,
+button:hover {
     opacity: 0.9;
+    background-color: #45a049;
 }
 
-/* Auth Pages (Sign In / Sign Up) */
+#delete-btn {
+    background-color: red;
+    margin-left: 5px;
+    width: 200px;
+}
+
+/* ========== Auth Pages ========== */
 .auth-page {
     max-width: 500px;
     margin: 50px auto;
     padding: 30px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
-
 
 .auth-page h2 {
     text-align: center;
     margin-bottom: 20px;
+    color: #4CAF50;
 }
 
 form {
@@ -104,28 +112,27 @@ form {
 label {
     font-weight: bold;
     margin-bottom: 5px;
+    color: #333;
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
+input[type="email"],
+input[type="password"],
+input[type="text"],
+textarea {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    color: #333;
+    width: 100%;
 }
 
-.auth-btn {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+textarea {
+    height: 100px;
+    resize: none;
 }
 
-.auth-btn:hover {
-    background-color: #45a049;
-}
-
+/* ========== Links ========== */
 p {
     text-align: center;
 }
@@ -139,7 +146,7 @@ p a:hover {
     text-decoration: underline;
 }
 
-/* Chat Page Styling */
+/* ========== Chat Page Enhancements ========== */
 .chat-page h2 {
     text-align: center;
     margin: 20px;
@@ -147,14 +154,13 @@ p a:hover {
 }
 
 .chat-box {
-    max-width: 100%;
-    margin-left: 10%;
-    margin-right: 10%;
+    max-width: 90%;
+    margin: 30px auto;
     padding: 20px;
     background-color: white;
+    color: #333;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
 }
 
 #conversation {
@@ -164,82 +170,84 @@ p a:hover {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    scroll-behavior: smooth;
 }
 
 .chat-message {
-    max-width: 70%;
-    padding: 10px;
+    max-width: 80%;
+    padding: 12px 18px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     font-size: 16px;
-    text-align: left;
     display: inline-block;
+    clear: both;
+    word-wrap: break-word;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.user-message {
+    background-color: #d4edda;
+    color: #155724;
+    float: right;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #b1c9de;
+    color: #2d5373;
+    float: left;
+    text-align: left;
+}
+
+.chat-input-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.chat-input-section input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chat-input-section button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.chat-input-section button:hover {
+    background-color: #45a049;
 }
 
 .chat-buttons {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-#delete-btn {
-    width: 200px;
-    margin-left: 5px;
-    background-color: red;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* User Message */
-.user-message {
-    background-color: #d4edda;
-    color: #155724;
-    text-align: right;
-    float: right;
-    clear: both;
-}
-
-/* Bot Message */
-.bot-message {
-    background-color: #b1c9de;
-    color: #2d5373;
-    text-align: left;
-    float: left;
-    clear: both;
-}
-
-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    resize: none;
-}
-
-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* Landing Page Styles */
+/* ========== Landing Page ========== */
 .landing-header {
     height: 100vh;
-    background-image: url('/static/img/mental1.png');
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white;
     position: relative;
 }
 
@@ -268,9 +276,11 @@ button:hover {
     margin-bottom: 30px;
 }
 
+/* ========== Features Section ========== */
 .features {
     background-color: #f4f4f4;
     padding: 50px;
+    color: #333;
 }
 
 .features h2 {
@@ -283,6 +293,7 @@ button:hover {
     justify-content: space-between;
     gap: 20px;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 .feature-item {
@@ -293,6 +304,7 @@ button:hover {
     border-radius: 10px;
 }
 
+/* ========== CTA Section ========== */
 .cta {
     background-color: #4CAF50;
     color: white;
@@ -316,9 +328,10 @@ button:hover {
     border-color: #4CAF50;
 }
 
-/* Mobile Responsive */
+/* ========== Mobile Responsive ========== */
 @media (max-width: 768px) {
-    .auth-page, .chat-box {
+    .auth-page,
+    .chat-box {
         width: 90%;
     }
 
@@ -328,5 +341,9 @@ button:hover {
 
     .feature-grid {
         flex-direction: column;
+    }
+
+    .chat-message {
+        max-width: 90%;
     }
 }
