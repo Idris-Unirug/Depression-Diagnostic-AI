@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Chat | Depression Diagnosis Assistant{% endblock %}
+
+{% block content %}
+<main class="chat-page">
+    <h2>Welcome Back to Chat, {{ username }}!</h2>
+
+    <div class="chat-box" id="chat-box">
+        <!-- Conversation messages will appear here -->
+        <div id="conversation"></div>
+        <!-- Input area for the user message -->
+        <textarea id="user-input" placeholder="Type your message here..."></textarea>
+        <div class="chat-buttons">
+            <button id="send-btn">Send Message</button>
+            <button id="delete-btn">Delete Chat</button>
+        </div>
+
+    </div>
+
+
+</main>
+
+<script>
+    function show_chat_history() {
+        $.ajax({
+            url: '/get_chat_history',
+            method: 'GET',
+            success: function (resp) {
+                // Check the data structure and ensure it's in JSON format
+                let data;
+                try {
+                    data = JSON.parse(resp); // In case the response is a JSON string
+                } catch (e) {
+                    data = resp; // If already an object
+                }
+
+                if (Array.isArray(data)) {
+                    const conversationContainer = document.getElementById("conversation");
+
+                    data.forEach((item) => {
+                        // Create user message
+                        if (item.user_query) {
+                            const userMessage = document.createElement("div");
+                            userMessage.classList.add("chat-message", "user-message");
+                            userMessage.innerHTML = `<p>${item.user_query}</p>`;
+                            conversationContainer.appendChild(userMessage);
+                        }
+
+                        // Create bot message
+                        const botMessage = document.createElement("div");
+                        botMessage.classList.add("chat-message", "bot-message");
+                        botMessage.innerHTML = `<p>${item.bot_response}</p>`;
+                        conversationContainer.appendChild(botMessage);
+                    });
+
+                    // Scroll chat box to the bottom
+                    setTimeout(function () {
+                        const chatBox = document.getElementById("conversation");
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }, 100); // Adjust the timeout if needed
+                } else {
+                    console.log("Error: Data is not an array");
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    show_chat_history();
+
+
+    // Function to handle sending a message
+    function sendMessage() {
+        const botMessage = document.createElement("div");
+
+        const userInput = document.getElementById("user-input").value.trim();
+        if (userInput !== "") {
+            // Append the user's message to the conversation
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("chat-message", "user-message");
+            userMessage.innerHTML = `<p>${userInput}</p>`;
+            document.getElementById("conversation").appendChild(userMessage);
+
+
+            $.ajax({
+                url: '/reply',
+                method: 'POST',
+                data: { 'userInput': userInput },
+                success: function (resp) {
+                    setTimeout(function () {
+                        const botMessage = document.createElement("div");
+                        botMessage.classList.add("chat-message", "bot-message");
+                        botMessage.innerHTML = `<p>${resp}</p>`;
+                        document.getElementById("conversation").appendChild(botMessage);
+
+                        setTimeout(function () {
+                            const chatBox = document.getElementById("conversation");
+                            chatBox.scrollTop = chatBox.scrollHeight;
+                        }, 100); // Adjust the timeout if needed
+                    }, 500);
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+
+            })
+
+            // Clear the user inputa
+            document.getElementById("user-input").value = "";
+        }
+    }
+
+    // Add event listener to the send button
+    document.getElementById("send-btn").addEventListener("click", sendMessage);
+
+    // Also allow sending messages by pressing 'Enter' key
+    document.getElementById("user-input").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();  // Prevents the default behavior of adding a newline
+            sendMessage();
+        }
+    });
+
+    $('#delete-btn').click(function () {
+        console.log('clicked deletere')
+        $.ajax({
+            url: 'delete_chat',
+            method: 'GET',
+            success: function () {
+                console.log('suceess')
+                document.getElementById("conversation").innerHTML = '';
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Welcome | Depression Diagnosis Assistant{% endblock %}
+
+{% block content %}
+<header class="landing-header">
+    <div class="overlay"></div>
+    <div class="header-content">
+        <h1>Your Mental Health, Our Priority</h1>
+        <p>Explore a world of AI-driven mental health support. Get accurate depression diagnosis and personalized care suggestions based on your well-being.</p>
+        <a href="/signup" class="button">Get Started</a>
+        <a href="/signin" class="button secondary">Sign In</a>
+    </div>
+</header>
+
+<section class="features">
+    <div class="container">
+        <h2>Why Choose Us?</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>AI-Driven Diagnosis</h3>
+                <p>Our AI assistant helps detect signs of depression based on your feelings and symptoms.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Personalized Solutions</h3>
+                <p>Receive customized mental health suggestions to help improve your condition.</p>
+            </div>
+            <div class="feature-item">
+                <h3>24/7 Availability</h3>
+                <p>Access support at any time from anywhere in the world.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>Sign up now and begin your journey towards better mental health.</p>
+        <a href="/signup" class="button">Join Now</a>
+    </div>
+</section>
+{% endblock %}

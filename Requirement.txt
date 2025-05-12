@@ -1,0 +1,6 @@
+flask
+pandas 
+groq
+faiss-cpu
+sentence-transformers
+numpy

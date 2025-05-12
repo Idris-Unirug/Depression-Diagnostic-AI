@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Depression Diagnosis Assistant</a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/chat">Chat</a></li>
+                {% if not session.get('user_logged_in') %}
+                    <li><a href="/signup">Signup</a></li>
+                {% else %}
+                    <li><a href="/signout">Signout</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+    {% block content %}{% endblock %}
+    <!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+</body>
+</html>
